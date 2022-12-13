@@ -1,7 +1,5 @@
 package OOP_new.interfaces;
 
-import java.util.ArrayList;
-
 public class Main {
     /*
     public static void main(String[] args) {
@@ -60,7 +58,8 @@ public class Main {
 
      */
 
-    public static void main(String[] args) {
+/*
+*     public static void main(String[] args) {
         Director director = new Director();
         Programmer programmer = new Programmer();
         Chef chef = new Chef();
@@ -72,11 +71,48 @@ public class Main {
         for(Worker worker : workers ){
             worker.work();
         }
+
         ArrayList<Driver> drivers = new ArrayList<>();
         drivers.add(programmer);
         drivers.add(chef);
         for(Driver driver : drivers ){
             driver.drive();
         }
+    }
+* */
+
+    /*
+        public static void main(String[] args) {
+            Director director = new Director();             //Первый вариант
+    //        Programmer programmer = new Programmer(); //создать класс , реализовать интерфейс,
+                                                        //в main создать экземпляр класса и потом
+    //        director.force(programmer);               // передать в качестве параметра в метод force()
+            //но бывает что экземпляр интерфейсного типа нужен только в одном месте поэтому:
+            // можно обойтись экземплярами анонимных классов
+            director.force(new Worker() { //В качестве параметра методу force() нужен экземпляр интерфейсного типа Worker
+                @Override                  //то есть внутри метода создаем класс, который реализует интерфейс Worker()
+                public void work() {       // внутри переопределяем все методы которые есть в этом интерфейсе
+                    System.out.println("Работаю"); //тем самым получился класс, который реализует интерфейс Worker()
+                                                // у этого класса нет имени поэтому его называют анонимный класс
+                    // и прямо здесь создаем экземпляр класса через new, получается что в метод force()
+                    // передали экземпляр анонимного класса Worker(), где мы переопределили метод work()
+                }
+            });
+        }
+     */
+//    public static void main(String[] args) {
+//        Client client = new Client();
+//        WaiterBob waiterBob = new WaiterBob();
+//        client.makeOrder(waiterBob,"Пицца"  );
+//        }
+    public static void main(String[] args) {
+        Client client = new Client();
+
+        client.makeOrder(new Waiter() {
+            @Override
+            public void bringOrder(String dish) {
+                System.out.println("Я вам принес: " + dish);
+            }
+        }, "Пицца");
     }
 }
