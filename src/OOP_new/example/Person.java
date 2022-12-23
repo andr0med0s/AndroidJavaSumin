@@ -23,4 +23,10 @@ public class Person { // поля должны быть private
     public int getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+//        return "Name: " + name + " "+ "Age: " + age;
+        return String.format("Name: % Age: %", name, age);
+    }
 }
